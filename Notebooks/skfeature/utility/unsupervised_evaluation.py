@@ -1,5 +1,10 @@
+# modifications: 
+# replaced deprecated linear_assignmnet_
+# removed obsolete precompute_distances argument
+
 import numpy as np
-import linear_assignment_ as la
+# from sklearn.utils import linear_assignment_ as la
+from scipy.optimize import linear_sum_assignment as la
 from sklearn.metrics import accuracy_score
 from sklearn.metrics.cluster import normalized_mutual_info_score
 from sklearn.cluster import KMeans
@@ -57,7 +62,7 @@ def evaluation(X_selected, n_clusters, y):
         Accuracy
     """
     k_means = KMeans(n_clusters=n_clusters, init='k-means++', n_init=10, max_iter=300,
-                     tol=0.0001, precompute_distances=True, verbose=0,
+                     tol=0.0001, verbose=0,
                      random_state=None, copy_x=True, n_jobs=1)
 
     k_means.fit(X_selected)
